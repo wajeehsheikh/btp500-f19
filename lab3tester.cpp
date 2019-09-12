@@ -27,7 +27,7 @@ int main(void){
 	}
 	regular.reversePrint();
 	for(int i=0;i<7;i++){
-		if(i%2){
+		if(i%2==0){
 			regular.pop_front();
 		}
 		else{
@@ -48,7 +48,7 @@ int main(void){
 	}
 	regular.reversePrint();
 	for(int i=0;i<7;i++){
-		if(i%2==0){
+		if(i%2){
 			regular.pop_front();
 		}
 		else{
@@ -77,7 +77,7 @@ int main(void){
 	sentinel.reversePrint();
 
 	for(int i=0;i<7;i++){
-		if(i%2){
+		if(i%2==0){
 			sentinel.pop_front();
 		}
 		else{
@@ -98,7 +98,7 @@ int main(void){
 	}
 	sentinel.reversePrint();
 	for(int i=0;i<7;i++){
-		if(i%2==0){
+		if(i%2){
 			sentinel.pop_front();
 		}
 		else{
