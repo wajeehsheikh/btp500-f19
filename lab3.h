@@ -53,7 +53,7 @@ void DList<T>::print() const{
 		curr=curr->next_;
 	}
 	if(!front_){
-		std::cout << "empty list" << std::endl;
+		std::cout << "empty list";
 	}
 	std::cout << std::endl;
 }
@@ -65,7 +65,7 @@ void DList<T>::reversePrint() const{
 		curr=curr->prev_;
 	}
 	if(!back_){
-		std::cout << "empty list" << std::endl;
+		std::cout << "empty list";
 	}
 	std::cout << std::endl;
 }
@@ -128,7 +128,7 @@ void Sentinel<T>::print() const{
 		curr=curr->next_;
 	}
 	if(front_==back_){
-		std::cout << "empty list" << std::endl;
+		std::cout << "empty list";
 	}
 	std::cout << std::endl;
 }
@@ -140,7 +140,7 @@ void Sentinel<T>::reversePrint() const{
 		curr=curr->prev_;
 	}
 	if(front_==back_){
-		std::cout << "empty list" << std::endl;
+		std::cout << "empty list";
 	}
 	std::cout << std::endl;
 }
