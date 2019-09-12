@@ -52,6 +52,9 @@ void DList<T>::print() const{
 		std::cout << curr->data_ << " ";
 		curr=curr->next_;
 	}
+	if(!front_){
+		std::cout << "empty list" << std::endl;
+	}
 	std::cout << std::endl;
 }
 template <typename T>
@@ -60,6 +63,9 @@ void DList<T>::reversePrint() const{
 	while(curr!=nullptr){
 		std::cout << curr->data_ << " ";
 		curr=curr->prev_;
+	}
+	if(!back_){
+		std::cout << "empty list" << std::endl;
 	}
 	std::cout << std::endl;
 }
@@ -121,6 +127,9 @@ void Sentinel<T>::print() const{
 		std::cout << curr->data_ << " ";
 		curr=curr->next_;
 	}
+	if(front_==back_){
+		std::cout << "empty list" << std::endl;
+	}
 	std::cout << std::endl;
 }
 template <typename T>
@@ -129,6 +138,9 @@ void Sentinel<T>::reversePrint() const{
 	while(curr!=front_){
 		std::cout << curr->data_ << " ";
 		curr=curr->prev_;
+	}
+	if(front_==back_){
+		std::cout << "empty list" << std::endl;
 	}
 	std::cout << std::endl;
 }
