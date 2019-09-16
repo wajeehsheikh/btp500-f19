@@ -127,7 +127,7 @@ void Sentinel<T>::print() const{
 		std::cout << curr->data_ << " ";
 		curr=curr->next_;
 	}
-	if(front_==back_){
+	if(front_->next_==back_){
 		std::cout << "empty list";
 	}
 	std::cout << std::endl;
@@ -139,7 +139,7 @@ void Sentinel<T>::reversePrint() const{
 		std::cout << curr->data_ << " ";
 		curr=curr->prev_;
 	}
-	if(front_==back_){
+	if(back->prev_==front_){
 		std::cout << "empty list";
 	}
 	std::cout << std::endl;
