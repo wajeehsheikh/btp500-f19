@@ -1,5 +1,13 @@
 #include <iostream>
-
+/****************************************/
+/*                                      */
+/* Lab 3 starter file                   */
+/* V 1.1.1:fixed back_ typo in line 150 */
+/* V 1.1: updated Sentinel::print()     */
+/*        and sentinel::reversePrint()  */
+/*                                      */
+/*                                      */
+/****************************************/
 template <typename T>
 class DList{
 	struct Node{
@@ -31,9 +39,7 @@ public:
 
 template <typename T>
 void DList<T>::push_front(const T& data){
-	Node* nn=new Node(data,front_);
-	front_->prev_=nn;
-	front_=nn;
+
 }
 template <typename T>
 void DList<T>::push_back(const T& data){
@@ -129,7 +135,7 @@ void Sentinel<T>::print() const{
 		std::cout << curr->data_ << " ";
 		curr=curr->next_;
 	}
-	if(front_==back_){
+	if(front_->next_==back_){
 		std::cout << "empty list";
 	}
 	std::cout << std::endl;
@@ -141,7 +147,7 @@ void Sentinel<T>::reversePrint() const{
 		std::cout << curr->data_ << " ";
 		curr=curr->prev_;
 	}
-	if(front_==back_){
+	if(back_->prev_==front_){
 		std::cout << "empty list";
 	}
 	std::cout << std::endl;
