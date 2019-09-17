@@ -32,7 +32,12 @@ public:
 template <typename T>
 void DList<T>::push_front(const T& data){
 	Node* nn=new Node(data,front_);
-	front_->prev_=nn;
+	if(front_){
+		front_->prev_=nn;
+	}
+	else{
+		back_=nn;
+	}
 	front_=nn;
 }
 template <typename T>
