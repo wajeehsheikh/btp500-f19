@@ -39,12 +39,12 @@ public:
 };
 
 template <typename T>
-DList::DList(const DList& other){
+DList<T>::::DList(const DList<T>& other){
 
 }
 
 template <typename T>
-DList::DList(const DList&& other){
+DList<T>::::DList(const DList<T>&& other){
 	
 }
 
