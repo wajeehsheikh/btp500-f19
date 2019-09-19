@@ -56,7 +56,17 @@ void DList<T>::push_back(const T& data){
 }
 template <typename T>
 void DList<T>::pop_front(){
-
+	if(front_){
+		Node* rm = front_;
+		front_=rm->next_;
+		if(front_)
+			front_->prev_=nullptr;
+		}
+		else{
+			back_=nullptr;
+		}
+		delete rm;
+	}
 }
 template <typename T>
 void DList<T>::pop_back(){
@@ -124,6 +134,10 @@ public:
 template <typename T>
 void Sentinel<T>::push_front(const T& data){
 
+	Node* nn=new Node(data, front_->next_, front_);
+	front_->next_=nn;
+	nn->next_->prev_=nn;
+
 }
 template <typename T>
 void Sentinel<T>::push_back(const T& data){
@@ -131,7 +145,21 @@ void Sentinel<T>::push_back(const T& data){
 }
 template <typename T>
 void Sentinel<T>::pop_front(){
+	if(front_->next_!=back_){
+		Node* rm = front_->next_;
+		rm->next_->prev_=rm->prev_;
+		rm->prev_->next_=rm->next_;
+/* v2:
 
+		Node* rm = front_->next_;
+		Node* n=rm->next_;
+		Node* p=rm->prev_;
+		n->prev_=p;
+		p->next_=n;
+
+*/		
+		delete rm;
+	}
 }
 template <typename T>
 void Sentinel<T>::pop_back(){
