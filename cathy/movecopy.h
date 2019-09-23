@@ -34,8 +34,19 @@ public:
 	void print() const;
 	void reversePrint() const;
 	~DList();
+	DList(const DList& other);
+	DList(const DList&& other);
 };
 
+template <typename T>
+DList<T>::::DList(const DList<T>& other){
+
+}
+
+template <typename T>
+DList<T>::::DList(const DList<T>&& other){
+	
+}
 
 template <typename T>
 void DList<T>::push_front(const T& data){

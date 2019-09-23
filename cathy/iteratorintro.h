@@ -27,10 +27,87 @@ public:
 		front_=nullptr;
 		back_=nullptr;
 	}
+	class const_iterator{
+		friend DList;
+	protected:
+		Node* curr_;
+		const_iterator(Node* curr){
+			curr_=curr;
+		}
+	public:
+		const_iterator(){
+			curr_=nullptr;
+		}
+		const_iterator operator++(){
+			curr_=curr_->next_;
+			return *this;			
+		}
+		const_iterator operator++(int){
+			const_iterator rc=*this;
+			curr_=curr_->next_;
+			return rc;
+		}
+		bool operator!=(const const_iterator& rhs) const{
+			return (curr_!=rhs.curr_);
+		}
+		bool operator==(const const_iterator& rhs) const{
+			return (curr_==rhs.curr_);
+		}
+		const T& operator*()const{
+			return curr_->data_;
+
+		}
+	};
+	class iterator:public const_iterator{
+		friend DList;
+
+		iterator(Node* curr):const_iterator(curr){
+		}
+	public:
+		iterator(){
+			this->curr_=nullptr;
+		}
+		iterator operator++(){
+			this->curr_=this->curr_->next_;
+			return *this;			
+		}
+		iterator operator++(int){
+			iterator rc=*this;
+			this->curr_=this->curr_->next_;
+			return rc;
+		}
+		bool operator!=(const iterator& rhs) const{
+			return (this->curr_!=rhs.curr_);
+		}
+		bool operator==(const iterator& rhs) const{
+			return (this->curr_==rhs.curr_);
+		}
+		T& operator*(){
+			return this->curr_->data_;
+
+		}
+	};
 	void push_front(const T& data);
 	void push_back(const T& data);
 	void pop_front();
 	void pop_back();
+	//returns iterator to first node
+	//in linked list
+	const_iterator cbegin() const{
+		return const_iterator(front_);
+	}
+	//returns a const_itator to 
+	const_iterator cend() const{
+		return const_iterator(nullptr);
+	}
+	iterator begin(){
+		return iterator(front_);
+	}
+	//returns a const_itator to 
+	iterator end(){
+		return iterator(nullptr);
+	}
+
 	void print() const;
 	void reversePrint() const;
 	~DList();
@@ -59,7 +136,7 @@ void DList<T>::pop_front(){
 	if(front_){
 		Node* rm = front_;
 		front_=rm->next_;
-		if(front_)
+		if(front_){
 			front_->prev_=nullptr;
 		}
 		else{
