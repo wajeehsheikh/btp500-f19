@@ -1,28 +1,15 @@
-#include "disjointset.h"
-DisjointSet::DisjointSet(int max){
+class DisjointSet{
 
-}
-bool DisjointSet::makeSet(int object){
+public:
 
-}
-int DisjointSet::findSet() const{
+	DisjointSet(int max);
+	bool makeSet(int object);
+	int findSet() const;
+	bool union(int rep1, int rep2);
+	~DisjointSet();
+	DisjointSet(const DisjointSet& other);
+	const DisjointSet& operator=(const DisjointSet& other);
+	DisjointSet(DisjointSet&& other);
+	const DisjointSet& operator=(DisjointSet&& other);
 
-}
-bool DisjointSet::union(int rep1, int rep2){
-
-}
-DisjointSet::~DisjointSet(){
-
-}
-DisjointSet::DisjointSet(const DisjointSet& other){
-
-}
-DisjointSet& DisjointSet::operator=(const DisjointSet& other){
-
-}
-DisjointSet::DisjointSet(const DisjointSet&& other){
-
-}
-DisjointSet& DisjointSet::operator=(const DisjointSet&& other){
-	
-}
+};
