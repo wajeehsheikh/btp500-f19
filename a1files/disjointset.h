@@ -10,7 +10,7 @@ public:
 
 	DisjointSet(int max);
 	bool makeSet(int object);
-	int findSet() const;
+	int findSet(int object) const;
 	bool union(int rep1, int rep2);
 	~DisjointSet();
 	DisjointSet(const DisjointSet& other);
