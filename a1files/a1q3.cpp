@@ -1,6 +1,6 @@
 #include "wall.h"
 #include "maze.h"
 
-int runmaze(Maze& theMaze, int path[], int row, int col){
+int runMaze(Maze& theMaze, int path[], int startCell, int endCell){
 	
 }

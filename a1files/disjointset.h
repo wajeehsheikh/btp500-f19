@@ -1,3 +1,9 @@
+/*************************************/
+/*                                   */
+/* V 1.0.1: removed const on returns */
+/*                                   */
+/*************************************/
+
 class DisjointSet{
 
 public:
@@ -8,8 +14,8 @@ public:
 	bool union(int rep1, int rep2);
 	~DisjointSet();
 	DisjointSet(const DisjointSet& other);
-	const DisjointSet& operator=(const DisjointSet& other);
+	DisjointSet& operator=(const DisjointSet& other);
 	DisjointSet(DisjointSet&& other);
-	const DisjointSet& operator=(DisjointSet&& other);
+	DisjointSet& operator=(DisjointSet&& other);
 
 };

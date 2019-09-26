@@ -1,4 +1,4 @@
 #include "wall.h"
-int generateMaze(int row, int col, Walls walls[]){
+int generateMaze(int row, int col, Wall walls[]){
 	
 }
