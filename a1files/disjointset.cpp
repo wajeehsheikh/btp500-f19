@@ -8,7 +8,7 @@ bool DisjointSet::makeSet(int object){
 int DisjointSet::findSet(int object) const{
 
 }
-bool DisjointSet::union(int rep1, int rep2){
+bool DisjointSet::unionSet(int rep1, int rep2){
 
 }
 DisjointSet::~DisjointSet(){
