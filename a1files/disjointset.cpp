@@ -20,9 +20,9 @@ DisjointSet::DisjointSet(const DisjointSet& other){
 DisjointSet& DisjointSet::operator=(const DisjointSet& other){
 
 }
-DisjointSet::DisjointSet(const DisjointSet&& other){
+DisjointSet::DisjointSet(DisjointSet&& other){
 
 }
-DisjointSet& DisjointSet::operator=(const DisjointSet&& other){
+DisjointSet& DisjointSet::operator=(DisjointSet&& other){
 	
 }
