@@ -1,15 +1,17 @@
-/****************************************************************/
-/*                                                              */
-/*   A1 part1 tester file                                       */
-/*                                                              */
-/*   To compile: g++ disjointset.cpp a1q1tester.cpp -std=c++0x  */
-/*                                                              */
-/*                                                              */
-/****************************************************************/
+/**************************************************************************/
+/*                                                                        */
+/*   A1 part1 tester file                                                 */
+/*                                                                        */
+/*   To compile: g++ disjointset.cpp a1q1tester.cpp timer.cpp -std=c++0x  */
+/*                                                                        */
+/*                                                                        */
+/**************************************************************************/
 
 #include "disjointset.h"
+#include "timer.h"
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 bool test1(std::string& error);	
 bool test2(std::string& error);	
@@ -21,12 +23,14 @@ bool test7(std::string& error);
 bool test8(std::string& error);
 bool test9(std::string& error);
 bool test10(std::string& error);
-const int numTests=10;
+bool test11(std::string& error);
+const int numTests=11;
 typedef bool (*TestPtr)(std::string&);
 
 int main(void){
 	TestPtr runTest[numTests]={test1, test2, test3, test4, test5, 
-		                       test6, test7, test8, test9, test10};
+		                       test6, test7, test8, test9, test10,
+		                   	   test11};
 	std::string msg;
 	bool result=true;
 	int numPassed=0;
@@ -462,4 +466,52 @@ bool test10(std::string& error){
 	}
 
 	return rc;	
+}
+/*Test 11: Timing runs, no errors for these.*/
+bool test11(std::string& error){
+
+	Timer t;
+	Timer t2;
+	DisjointSet set1(50000);
+	DisjointSet set2(50000);
+	t.reset();
+	for(int i=0;i<50000;i++){
+		t.start();
+		set1.makeSet(i);
+		set2.makeSet(i);
+		t.stop();
+	}
+	std::cout << "100000 makeSet(): " << t.currtime() << std::endl;
+	int rep1;
+	int rep2;
+	t.reset();
+	t2.reset();
+	for(int i=0;i<49999;i++){
+		t.start();
+		rep1=set1.findSet(i);
+		rep2=set1.findSet(i+1);
+		t.stop();
+		t2.start();
+		set1.unionSet(rep1,rep2);
+		t2.stop();
+	}
+	std::cout << "49998 findSet(): " << t.currtime() << std::endl;
+	std::cout << "49999 unionSet(): " << t2.currtime() << std::endl;
+	t.reset();
+	t2.reset();
+	for(int i=0;i<49999;i++){
+		int choice=rand()%(i+1);
+		t.start();
+		rep1=set1.findSet(choice);
+		rep2=set1.findSet(i+1);
+		t.stop();
+		t2.start();
+		set1.unionSet(rep2,rep1);
+		t2.stop();
+	}
+	std::cout << "another 49998 findSet(): " << t.currtime() << std::endl;
+	std::cout << "another 49999 unionSet(): " << t2.currtime() << std::endl;
+
+
+	return true;
 }
