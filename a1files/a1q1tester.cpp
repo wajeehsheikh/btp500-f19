@@ -103,10 +103,10 @@ bool test3(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 		if(result != true){
 			rc=false;
-			error="Error 3: unionSet() did not return the correct value, it should have returned true";
+			error="Error 3: unionSets() did not return the correct value, it should have returned true";
 		}
 	}
 	for(int i=0;rc && i<50;i++){
@@ -124,7 +124,7 @@ bool test3(std::string& error){
 	return rc;
 }
 
-/*test 4: try to call unionSet() with values that are not the reps
+/*test 4: try to call unionSets() with values that are not the reps
   for the set, check return value, ensure that union() did not occur*/
 bool test4(std::string& error){
 	DisjointSet theSet(100);
@@ -136,17 +136,17 @@ bool test4(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
 		int arg1=(rep1==i*2)?i*2+1:i*2;
 		int arg2=(rep2==(i+1)*2)?(i+1)*2+1:(i+1)*2;
-		result=theSet.unionSet(arg1,arg2);
+		result=theSet.unionSets(arg1,arg2);
 		if(result!=false){
 			rc=false;
-			error="Error 4: unionSet() should return false if non-representatives are used as arguments";
+			error="Error 4: unionSets() should return false if non-representatives are used as arguments";
 		}
 		else{
 			if(theSet.findSet(arg1)==theSet.findSet(arg2)){
@@ -157,7 +157,7 @@ bool test4(std::string& error){
 	}
 	return rc;
 }
-/*test 5: unionSet() on sets that are more than 1 element big*/
+/*test 5: unionSets() on sets that are more than 1 element big*/
 
 bool test5(std::string& error){
 	DisjointSet theSet(100);
@@ -169,16 +169,16 @@ bool test5(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
 
-		result=theSet.unionSet(rep1,rep2);
+		result=theSet.unionSets(rep1,rep2);
 		if(result==false){
 			rc=false;
-			error="Error 5a: unionSet() returned false, it should have returned true as sets should have been unioned";
+			error="Error 5a: unionSets() returned false, it should have returned true as sets should have been unioned";
 		}
 		else{
 			if(theSet.findSet(rep1)!=theSet.findSet(rep2)){
@@ -190,7 +190,7 @@ bool test5(std::string& error){
 	return rc;
 }
 
-/*Test 6: further testing on unionSet() and findSet()*/
+/*Test 6: further testing on unionSets() and findSet()*/
 bool test6(std::string& error){
 	DisjointSet theSet(100);
 	bool result;
@@ -201,20 +201,20 @@ bool test6(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
-		theSet.unionSet(rep1,rep2);
+		theSet.unionSets(rep1,rep2);
 	}
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
 		rep1=theSet.findSet(i);
 		rep2=theSet.findSet(j);
-		result=theSet.unionSet(rep1,rep2);
+		result=theSet.unionSets(rep1,rep2);
 		if(result==false){
 			rc=false;
-			error="Error 6a: unionSet() returned false, it should have returned true";
+			error="Error 6a: unionSets() returned false, it should have returned true";
 		}
 	}
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
@@ -232,10 +232,10 @@ bool test6(std::string& error){
 	}
 	rep1=theSet.findSet(97);
 	rep2=theSet.findSet(50);
-	result=theSet.unionSet(rep1,rep2);
+	result=theSet.unionSets(rep1,rep2);
 	if(result == false){
 		rc=false;
-		error="Error 6d: unionSet() returned false, it should have returned true";
+		error="Error 6d: unionSets() returned false, it should have returned true";
 	}
 	int newRep=theSet.findSet(0);
 	for(int i=0;rc && i<4;i++){
@@ -270,17 +270,17 @@ bool test7(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
-		theSet.unionSet(rep1,rep2);
+		theSet.unionSets(rep1,rep2);
 	}
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
 		rep1=theSet.findSet(i);
 		rep2=theSet.findSet(j);
-		result=theSet.unionSet(rep1,rep2);
+		result=theSet.unionSets(rep1,rep2);
 	}
 	DisjointSet copy=theSet;
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
@@ -298,7 +298,7 @@ bool test7(std::string& error){
 	}
 	rep1=theSet.findSet(97);
 	rep2=theSet.findSet(50);
-	result=theSet.unionSet(rep1,rep2);
+	result=theSet.unionSets(rep1,rep2);
 	if(copy.findSet(97) == copy.findSet(50)){
 		rc=false;
 		error="Error 7c: Copy constructor appears to not have made a deep copy";
@@ -327,17 +327,17 @@ bool test8(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
-		theSet.unionSet(rep1,rep2);
+		theSet.unionSets(rep1,rep2);
 	}
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
 		rep1=theSet.findSet(i);
 		rep2=theSet.findSet(j);
-		result=theSet.unionSet(rep1,rep2);
+		result=theSet.unionSets(rep1,rep2);
 	}
 	copy2=copy=theSet;
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
@@ -368,7 +368,7 @@ bool test8(std::string& error){
 	}
 	rep1=theSet.findSet(97);
 	rep2=theSet.findSet(50);
-	result=theSet.unionSet(rep1,rep2);
+	result=theSet.unionSets(rep1,rep2);
 	if(copy.findSet(97) == copy.findSet(50)){
 		rc=false;
 		error="Error 8e: assignment operator appears to not have made a deep copy";
@@ -392,17 +392,17 @@ bool test9(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
-		theSet.unionSet(rep1,rep2);
+		theSet.unionSets(rep1,rep2);
 	}
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
 		rep1=theSet.findSet(i);
 		rep2=theSet.findSet(j);
-		result=theSet.unionSet(rep1,rep2);
+		result=theSet.unionSets(rep1,rep2);
 	}
 	DisjointSet copy=std::move(theSet);
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
@@ -438,17 +438,17 @@ bool test10(std::string& error){
 		theSet.makeSet(i);
 	}
 	for(int i=0;rc && i<100;i+=2){
-		result = theSet.unionSet(i,i+1);
+		result = theSet.unionSets(i,i+1);
 	}
 	for(int i=0;rc && i<50;i+=2){
 		rep1=theSet.findSet(i*2);
 		rep2=theSet.findSet((i+1)*2);		
-		theSet.unionSet(rep1,rep2);
+		theSet.unionSets(rep1,rep2);
 	}
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
 		rep1=theSet.findSet(i);
 		rep2=theSet.findSet(j);
-		result=theSet.unionSet(rep1,rep2);
+		result=theSet.unionSets(rep1,rep2);
 	}
 	copy=std::move(theSet);
 	for(int i=0,j=99;rc && i<48;i+=4,j-=4){
@@ -492,11 +492,11 @@ bool test11(std::string& error){
 		rep2=set1.findSet(i+1);
 		t.stop();
 		t2.start();
-		set1.unionSet(rep1,rep2);
+		set1.unionSets(rep1,rep2);
 		t2.stop();
 	}
 	std::cout << "49998 findSet(): " << t.currtime() << std::endl;
-	std::cout << "49999 unionSet(): " << t2.currtime() << std::endl;
+	std::cout << "49999 unionSets(): " << t2.currtime() << std::endl;
 	t.reset();
 	t2.reset();
 	for(int i=0;i<49999;i++){
@@ -506,11 +506,11 @@ bool test11(std::string& error){
 		rep2=set1.findSet(i+1);
 		t.stop();
 		t2.start();
-		set1.unionSet(rep2,rep1);
+		set1.unionSets(rep2,rep1);
 		t2.stop();
 	}
 	std::cout << "another 49998 findSet(): " << t.currtime() << std::endl;
-	std::cout << "another 49999 unionSet(): " << t2.currtime() << std::endl;
+	std::cout << "another 49999 unionSets(): " << t2.currtime() << std::endl;
 
 
 	return true;
