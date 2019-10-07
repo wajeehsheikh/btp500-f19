@@ -218,8 +218,8 @@ void printMaze(const std::string& fname, int maxRow, int maxCol, Wall walls[], i
 	fs <<"[" << walls[numWalls-1].cell1() << ", " << walls[numWalls-1].cell2() <<"]]}" << std::endl;
 	fs.close();
 }
-/*test2: check to make sure every cell is reacheable.  This is done by seeing if any
-         cells has all its walls*/
+/*test2: check to make sure every cell is reacheable.  
+This is done by seeing whether or not all cells are connected*/
 bool test2(std::string& error){
 	int rc=true;
 	Wall walls[50000];
