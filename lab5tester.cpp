@@ -1,6 +1,13 @@
 #include <string>
 #include <iostream>
-/* Tester for Lab 5  */
+/************************************************************/
+/*  Lab 5 tester                                            */
+/*  To compile:                                             */
+/*     g++ lab5.cpp lab5tester.cpp -std=c++0x               */
+/*  To run:                                                 */
+/*     ./a.out                                              */
+/************************************************************/
+
 bool bracketCheck(const std::string& s);
 int main(void){
 	std::string tests[5]={
