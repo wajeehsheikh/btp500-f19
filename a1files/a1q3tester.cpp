@@ -5,6 +5,9 @@
 /*   To compile: g++ a1q3.cpp a1q3tester.cpp maze.cpp -std=c++0x          */
 /*                                                                        */
 /*                                                                        */
+/*   You will also need the files maze1.txt, maze2.txt, maze3.txt         */
+/*                                                                        */
+/*                                                                        */
 /**************************************************************************/
 #include "wall.h"
 #include "maze.h"
