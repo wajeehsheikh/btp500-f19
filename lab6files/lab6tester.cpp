@@ -16,7 +16,7 @@ void generateSorted(int array[],int size);
 void generateReversed(int array[],int size);
 void generateOrganPipe(int array[],int size);
 void generateRotated(int array[],int size);
-void generateZeroOne(int array[],int size);
+
 void quickSortLast(int arr[],int size);
 void quickSortMiddle(int arr[],int size);
 void quickSortMedianOf3(int arr[],int size);
@@ -31,24 +31,24 @@ typedef bool (*CheckerFunction)(int[],int);
 
 const int size=10000;
 int main(void){
-   int* arrays[6];
-   for(int i=0;i<6;i++){
+   int* arrays[5];
+   for(int i=0;i<5;i++){
       arrays[i]=new int[size];
    }
-   GeneratorPtr generators[6]={generateRandom, generateSorted, generateReversed,
-                              generateOrganPipe, generateRotated, generateZeroOne};
+   GeneratorPtr generators[5]={generateRandom, generateSorted, generateReversed,
+                              generateOrganPipe, generateRotated};
    SortPtr sort[4]={quickSortLast,quickSortMiddle,quickSortMedianOf3,quickSortRandom};
-   CheckerFunction check[6]{check0toNMinus1,check0toNMinus1,check0toNMinus1,
-                                 check0toHalf,check0toNMinus1,check01};
+   CheckerFunction check[5]{check0toNMinus1,check0toNMinus1,check0toNMinus1,
+                                 check0toHalf,check0toNMinus1};
    std::string sortName[4]={"quickSortLast","quickSortMiddle", "quickSortMedianOf3", "quickSortRandom"};
-   std::string dataName[6]={"random","sorted", "reversed", "organpipe","rotated","zerosandones"};
+   std::string dataName[5]={"random","sorted", "reversed", "organpipe","rotated"};
    bool rc=false;
    for(int i=0;i<4;i++){
       //seeding random number generator with same value, ensures the sequence
       //is the same.  This will ensure that different quicksort() work with same 
       //set of random values.
       srand(5);
-      for(int j=0;j<6;j++){
+      for(int j=0;j<5;j++){
          generators[j](arrays[j],size);
          sort[i](arrays[j],size);
          bool result=check[j](arrays[j],size);
@@ -61,7 +61,7 @@ int main(void){
          }
       }
    }
-   for(int i=0;i<6;i++){
+   for(int i=0;i<5;i++){
       delete [] arrays[i];
    }
    return 0;
@@ -101,21 +101,4 @@ bool check0toHalf(int arr[],int size){
    return rc;
 
 }
-bool check01(int arr[],int size){
-   bool rc=true;
-   for(int i=0;i<size;i++){
-      if(i<size/2){
-         if(arr[i]!=0){
-            rc=false;
-            break;
-         }
-      }
-      else{
-         if(arr[i]!=1){
-            rc=false;
-            break;
-         }
-      }
-   }   
-   return rc;
-}
+

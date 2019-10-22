@@ -39,17 +39,3 @@ void generateRotated(int array[],int size){
 	}
 	array[size-1]=0;
 }
-void generateZeroOne(int array[],int size){
-	for(int i=0;i<size/2;i++){
-		array[i]=0;
-	}
-	for(int i=size/2;i<size;i++){
-		array[i]=1;
-	}
-	for(int i=0;i<size;i++){
-		//pick random position out of first part of array
-		int pick=rand()%(size-i);
-		//swap it with last element
-		std::swap(array[pick],array[size-1-i]);
-	}	
-}

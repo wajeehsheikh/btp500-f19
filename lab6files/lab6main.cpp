@@ -3,11 +3,14 @@
 #include <string>
 #include "timer.h"
 /*****************************************************************/
-/*  Lab 6 tester                                                 */
+/*  Lab 6 main                                                   */
 /*  To compile:                                                  */
 /*     g++ lab6.cpp generatedata.cpp timer.cpp lab6main.cpp      */
 /*  To run:                                                      */
 /*     ./a.out                                                   */
+/*                                                               */
+/*  Feel free to modify this main to output data in a way that   */
+/*  is easy for you.                                             */ 
 /*****************************************************************/
 
 
@@ -40,20 +43,22 @@ int main(int argc, char* argv[]){
          std::cout << "Usage: a.out <array size> <pivot picking: 1-last, 2-middle, 3-medianOf3, 4-random" << std::endl;
          return 0;
       }
-      int* arrays[6];
-      GeneratorPtr generators[6]={generateRandom, generateSorted, generateReversed,
-                              generateOrganPipe, generateRotated, generateZeroOne};
+      int* arrays[5];
+      GeneratorPtr generators[5]={generateRandom, generateSorted, generateReversed,
+                              generateOrganPipe, generateRotated};
       SortPtr sort[4]={quickSortLast,quickSortMiddle,quickSortMedianOf3,quickSortRandom};
-      std::string dataName[6]={"random","sorted", "reversed", "organpipe","rotated","zerosandones"};
+      std::string dataName[5]={"random","sorted", "reversed", "organpipe","rotated"};
       Timer t;
 
-      for(int i=0;i<6;i++){
+      for(int i=0;i<5;i++){
          arrays[i]=new int[size];
          generators[i](arrays[i],size);
+         t.reset();
          t.start();
          sort[algchoice-1](arrays[i],size);
          t.stop();
          std::cout << dataName[i] << " : " << t.currtime() << std::endl;
+         delete [] arrays[i];
       }
 
 
