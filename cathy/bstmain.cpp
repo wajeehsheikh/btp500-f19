@@ -1,7 +1,7 @@
 #include "bst.h"
 
 int main(void){
-	BST tree;
+	BST<int> tree;
 	tree.insert(20);
 	tree.insert(10);
 	tree.insert(30);

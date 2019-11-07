@@ -11,14 +11,26 @@ class BST{
 			right_=right;
 		}
 	};
-	
+
 	Node* root_;
 
 public:
-	BST();
-	void insert(const T& data);
-	void remove(const T& data);
-	bool search(const T& data) const;
-	void print() const;
-	~BST();
+	BST(){
+
+	}
+	void insert(const T& data){
+
+	}
+	void remove(const T& data){
+
+	}
+	bool search(const T& data) const{
+
+	}
+	void print() const{
+
+	}
+	~BST(){
+		
+	}
 };
