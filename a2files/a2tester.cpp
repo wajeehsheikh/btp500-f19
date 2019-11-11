@@ -4,6 +4,7 @@
 /*                                                                        */
 /*   To compile: g++ a2tester -std=c++0x                                  */
 /*                                                                        */
+/*   V1.1: fixed bug with update() check                                  */
 /*                                                                        */
 /**************************************************************************/
 
@@ -92,23 +93,17 @@ bool test2(std::string keys[], int data[], int max, std::string& error){
 	int i=0;
 	int count=0;
 	while(isGood && count<650){
-
-		isGood=table1.update(keys[i],data[i]);
-		if(!isGood){
-			error="Error 2a: update() did not return true when adding data to the table";
+		table1.update(keys[i],data[i]);
+		if(table1.isEmpty()){
+			isGood=false;
+			error="Error 2a: table is not empty, isEmpty() should return false, your isEmpty() returns true";
 		}
-		else{
-			if(table1.isEmpty()){
-				isGood=false;
-				error="Error 2b: table is not empty, isEmpty() should return false, your isEmpty() returns true";
-			}
-			if(isGood && table1.numRecords()!=count+1){
-				isGood=false;
-				error="Error 2c: table should have ";
-				error+= std::to_string(count+1);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table1.numRecords());				
-			}
+		if(isGood && table1.numRecords()!=count+1){
+			isGood=false;
+			error="Error 2b: table should have ";
+			error+= std::to_string(count+1);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table1.numRecords());				
 		}
 		i++;
 		count++;
@@ -117,24 +112,20 @@ bool test2(std::string keys[], int data[], int max, std::string& error){
 
 	count=0;
 	while(isGood && count<7000){
+		table2.update(keys[i],data[i]);
 
-		isGood=table2.update(keys[i],data[i]);
-		if(!isGood){
-			error="Error 2d: update() did not return true when adding data to the table";
+		if(table2.isEmpty()){
+			isGood=false;
+			error="Error 2c: table is not empty, isEmpty() should return false, your isEmpty() returns true";
 		}
-		else{
-			if(table2.isEmpty()){
-				isGood=false;
-				error="Error 2e: table is not empty, isEmpty() should return false, your isEmpty() returns true";
-			}
-			if(isGood && table2.numRecords()!=count+1){
-				isGood=false;
-				error="Error 2f: table should have ";
-				error+= std::to_string(count+1);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table2.numRecords());				
-			}		
-		}
+		if(isGood && table2.numRecords()!=count+1){
+			isGood=false;
+			error="Error 2d: table should have ";
+			error+= std::to_string(count+1);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table2.numRecords());				
+		}		
+	
 		i++;
 		count++;
 	}
@@ -142,24 +133,19 @@ bool test2(std::string keys[], int data[], int max, std::string& error){
 
 	count=0;
 	while(isGood && count<60000){
+		table3.update(keys[i],data[i]);
+		if(table3.isEmpty()){
+			isGood=false;
+			error="Error 2e: table is not empty, isEmpty() should return false, your isEmpty() returns true";
+		}
+		if(isGood && table3.numRecords()!=count+1){
+			isGood=false;
+			error="Error 2f: table should have ";
+			error+= std::to_string(count+1);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table3.numRecords());				
+		}		
 
-		isGood=table3.update(keys[i],data[i]);
-		if(!isGood){
-			error="Error 2g: update() did not return true when adding data to the table";
-		}
-		else{
-			if(table3.isEmpty()){
-				isGood=false;
-				error="Error 2h: table is not empty, isEmpty() should return false, your isEmpty() returns true";
-			}
-			if(isGood && table3.numRecords()!=count+1){
-				isGood=false;
-				error="Error 2i: table should have ";
-				error+= std::to_string(count+1);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table3.numRecords());				
-			}		
-		}
 		i++;
 		count++;
 	}
@@ -297,60 +283,48 @@ bool test4(std::string keys[], int data[], int max, std::string& error){
 	count=0;
 	while(isGood && count<650){
 		if(count%2){
-			isGood=table1.update(keys[i],data[i]+1);
+			table1.update(keys[i],data[i]+1);
 		}
-		if(!isGood){
-			error="Error 4a: update() did not return true when modifying data to the table";
+
+		if(table1.numRecords()!=650){
+			isGood=false;
+			error="Error 4a: table should have ";
+			error+= std::to_string(650);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table1.numRecords());				
 		}
-		else{
-			if(table1.numRecords()!=650){
-				isGood=false;
-				error="Error 4b: table should have ";
-				error+= std::to_string(650);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table1.numRecords());				
-			}
-		}
+
 		i++;
 		count++;
 	}
 	count=0;
 	while(isGood && count<7000){
 		if(count%2){
-			isGood=table2.update(keys[i],data[i]+2);
+			table2.update(keys[i],data[i]+2);
 		}
-		if(!isGood){
-			error="Error 4c: update() did not return true when modifying data to the table";
-		}
-		else{
-			if(table2.numRecords()!=7000){
-				isGood=false;
-				error="Error 4d: table should have ";
-				error+= std::to_string(7000);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table2.numRecords());				
-			}		
-		}
+		if(table2.numRecords()!=7000){
+			isGood=false;
+			error="Error 4b: table should have ";
+			error+= std::to_string(7000);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table2.numRecords());				
+		}		
+
 		i++;
 		count++;
 	}
 	count=0;
 	while(isGood && count<60000){
 		if(count%2){
-			isGood=table3.update(keys[i],data[i]+3);
+			table3.update(keys[i],data[i]+3);
 		}
-		if(!isGood){
-			error="Error 4e: update() did not return true when modifying data to the table";
-		}
-		else{
-			if(table3.numRecords()!=60000){
-				isGood=false;
-				error="Error 4f: table should have ";
-				error+= std::to_string(600000);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table3.numRecords());				
-			}		
-		}
+		if(table3.numRecords()!=60000){
+			isGood=false;
+			error="Error 4c: table should have ";
+			error+= std::to_string(600000);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table3.numRecords());				
+		}		
 		i++;
 		count++;
 	}
@@ -498,63 +472,52 @@ bool test6(std::string keys[], int data[], int max, std::string& error){
 	bool isGood=true;
 	for(i=0, count=0;isGood && count<6500;count++, i++){
 
-		isGood=table1.update(keys[i],data[i]);
-		if(!isGood){
-			error="Error 6a: update() did not return true when adding data to the table";
+		table1.update(keys[i],data[i]);
+
+		if(table1.isEmpty()){
+			isGood=false;
+			error="Error 6a: table is not empty, isEmpty() should return false, your isEmpty() returns true";
 		}
-		else{
-			if(table1.isEmpty()){
-				isGood=false;
-				error="Error 6b: table is not empty, isEmpty() should return false, your isEmpty() returns true";
-			}
-			if(isGood && table1.numRecords()!=count+1){
-				isGood=false;
-				error="Error 6c: table should have ";
-				error+= std::to_string(count+1);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table1.numRecords());				
-			}
+		if(isGood && table1.numRecords()!=count+1){
+			isGood=false;
+			error="Error 6b: table should have ";
+			error+= std::to_string(count+1);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table1.numRecords());				
 		}
+
 	}
 
 	for(count=0; isGood&&  count<70000; count++,i++){
-		isGood=table2.update(keys[i],data[i]);
-		if(!isGood){
-			error="Error 6d: update() did not return true when adding data to the table";
+		table2.update(keys[i],data[i]);
+		if(table2.isEmpty()){
+			isGood=false;
+			error="Error 6c: table is not empty, isEmpty() should return false, your isEmpty() returns true";
 		}
-		else{
-			if(table2.isEmpty()){
-				isGood=false;
-				error="Error 6e: table is not empty, isEmpty() should return false, your isEmpty() returns true";
-			}
-			if(isGood && table2.numRecords()!=count+1){
-				isGood=false;
-				error="Error 6f: table should have ";
-				error+= std::to_string(count+1);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table2.numRecords());				
-			}
+		if(isGood && table2.numRecords()!=count+1){
+			isGood=false;
+			error="Error 6d: table should have ";
+			error+= std::to_string(count+1);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table2.numRecords());				
 		}
+
 	}
 
 	for(count=0; isGood && count<600000; count++,i++){
-		isGood=table3.update(keys[i],data[i]);
-		if(!isGood){
-			error="Error 6g: update() did not return true when adding data to the table";
+		table3.update(keys[i],data[i]);
+		if(table3.isEmpty()){
+			isGood=false;
+			error="Error 6e: table is not empty, isEmpty() should return false, your isEmpty() returns true";
 		}
-		else{
-			if(table3.isEmpty()){
-				isGood=false;
-				error="Error 6h: table is not empty, isEmpty() should return false, your isEmpty() returns true";
-			}
-			if(isGood && table3.numRecords()!=count+1){
-				isGood=false;
-				error="Error 6i: table should have ";
-				error+= std::to_string(count+1);
-				error+=" records, your numRecords() returned: ";
-				error+=std::to_string(table3.numRecords());				
-			}
+		if(isGood && table3.numRecords()!=count+1){
+			isGood=false;
+			error="Error 6f: table should have ";
+			error+= std::to_string(count+1);
+			error+=" records, your numRecords() returned: ";
+			error+=std::to_string(table3.numRecords());				
 		}
+
 	}
 
 
@@ -565,12 +528,12 @@ bool test6(std::string keys[], int data[], int max, std::string& error){
 	while(isGood && count<6500){
 		isGood=table1.find(keys[i],value);
 		if(!isGood){
-			error="Error 6j: find returned false for a record that should exist in the table";
+			error="Error 6g: find returned false for a record that should exist in the table";
 		}
 		else{
 			if(value!=data[i]){
 				isGood=false;				
-				error="Error 6k: value associated with key: ";
+				error="Error 6h: value associated with key: ";
 				error+=keys[i];
 				error+= " should be: ";
 				error+=to_string(data[i]);
@@ -586,12 +549,12 @@ bool test6(std::string keys[], int data[], int max, std::string& error){
 	while(isGood && count<70000){
 		isGood=table2.find(keys[i],value);
 		if(!isGood){
-			error="Error 6l: find returned false for a record that should exist in the table";
+			error="Error 6i: find returned false for a record that should exist in the table";
 		}
 		else{
 			if(value!=data[i]){
 				isGood=false;								
-				error="Error 6m: value associated with key: ";
+				error="Error 6j: value associated with key: ";
 				error+=keys[i];
 				error+= " should be: ";
 				error+=to_string(data[i]);
@@ -607,12 +570,12 @@ bool test6(std::string keys[], int data[], int max, std::string& error){
 		int value;
 		isGood=table3.find(keys[i],value);
 		if(!isGood){
-			error="Error 6n: find returned false for a record that should exist in the table";
+			error="Error 6k: find returned false for a record that should exist in the table";
 		}
 		else{
 			if(value!=data[i]){
 				isGood=false;				
-				error="Error 6o: value associated with key: ";
+				error="Error 6l: value associated with key: ";
 				error+=keys[i];
 				error+= " should be: ";
 				error+=to_string(data[i]);
