@@ -40,13 +40,72 @@ public:
 
 template <typename T>
 DList<T>::::DList(const DList<T>& other){
+	/*front_=back_=nullptr;
+	for(auto it=other.cbegin();it!=other.cend();it++){
+		push_back(*it);
+	}*/
+	
 
+	front_=back_=nullptr;
+	Node* curr=other.front_;
+	while(curr){
+		//create a new node out of curr
+		Node* nn=new Node(curr->data_);
+		//if linked list is empty
+		if(front_==nullptr){
+			front_=back_=nn;
+		}
+		else{
+			//
+		}
+		//add it to back of current linked list
+	}
+
+
+}
+/* steal data from other*/
+
+template <typename T>
+DList<T>::::DList(DList<T>&& other){
+	front_=other.front_;
+	back_=other.back_;
+	other.front_=nullptr;
+	other.back_=nullptr;	
 }
 
 template <typename T>
-DList<T>::::DList(const DList<T>&& other){
-	
+DList& DList<T>::operator=(const DList<T>& other){
+	if(&other != this){
+		//go through current object
+		curr=front_;
+		while(curr){
+			//...
+		}
+		//destroy every node
+
+		front_=back_=nullptr;
+		for(auto it=other.cbegin();it!=other.cend();it++){
+			push_back(*it);
+		}
+	}
+
+	return *this;
 }
+
+template <typename T>
+DList& DList<T>::operator=(DList<T>&& other){
+	if(&other != this){
+		Node* temp=front_;
+		front_=other.front_;
+		other.front_=temp;
+
+		temp=back_;
+		back_=other.back_;
+		other.back_=temp;					
+	}
+	return *this;
+}
+
 
 template <typename T>
 void DList<T>::push_front(const T& data){
